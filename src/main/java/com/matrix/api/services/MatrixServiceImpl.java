@@ -1,13 +1,13 @@
 package com.matrix.api.services;
 
+import com.matrix.api.dto.Commands;
+import com.matrix.api.dto.MatcherInfo;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.springframework.stereotype.Service;
-import com.matrix.api.dto.Commands;
-import com.matrix.api.dto.MatcherInfo;
 
 @Service
 public class MatrixServiceImpl implements MatrixService<List<String>, Commands> {

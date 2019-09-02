@@ -1,5 +1,7 @@
 package com.matrix.api.controller;
 
+import com.matrix.api.dto.Commands;
+import com.matrix.api.services.MatrixServiceImpl;
 import java.util.Collection;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
@@ -8,8 +10,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.matrix.api.dto.Commands;
-import com.matrix.api.services.MatrixServiceImpl;
 
 @CrossOrigin("*")
 @RestController
