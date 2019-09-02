@@ -11,5 +11,5 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Commands {
-  private List<String> commands;
+  private List<String> commandName;
 }

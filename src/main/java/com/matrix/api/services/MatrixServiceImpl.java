@@ -1,13 +1,13 @@
 package com.matrix.api.services;
 
+import com.matrix.api.dto.Commands;
+import com.matrix.api.dto.MatcherInfo;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.springframework.stereotype.Service;
-import com.matrix.api.dto.Commands;
-import com.matrix.api.dto.MatcherInfo;
 
 @Service
 public class MatrixServiceImpl implements MatrixService<List<String>, Commands> {
@@ -21,26 +21,28 @@ public class MatrixServiceImpl implements MatrixService<List<String>, Commands> 
 
   @Override
   public List<String> calculate(Commands commands) {
-    List<String> results = new ArrayList<String>();
+    List<String> results = new ArrayList<>();
 
-    commands.getCommands().stream().forEach(p -> {
+    commands.getCommandName().stream().forEach(p -> {
       MatcherInfo matcherInfo = getMatch(p, patterns, 0);
-      switch (matcherInfo.index) {
+      switch (matcherInfo.getIndex()) {
         case 0:
           break;
         case 1:
-          int N = Integer.valueOf(matcherInfo.matcher.group(2));
-          matrix = new Long[N][N][N];
-          for (int i = 0; i < N; i++)
-            for (int j = 0; j < N; j++)
-              for (int k = 0; k < N; k++)
+          int dimensionN = Integer.parseInt(matcherInfo.getMatcher().group(2));
+          matrix = new Long[dimensionN][dimensionN][dimensionN];
+          for (int i = 0; i < dimensionN; i++)
+            for (int j = 0; j < dimensionN; j++)
+              for (int k = 0; k < dimensionN; k++)
                 matrix[i][j][k] = 0L;
           break;
         case 2:
-          updateMatrix(matrix, matcherInfo.matcher);
+          updateMatrix(matrix, matcherInfo.getMatcher());
           break;
         case 3:
-          results.add(queryMatrix(matrix, matcherInfo.matcher));
+          results.add(queryMatrix(matrix, matcherInfo.getMatcher()));
+          break;
+        default:
           break;
       }
     });
